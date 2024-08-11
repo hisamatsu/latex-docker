@@ -9,7 +9,7 @@ on:
     paths:
       - 'Dockerfile'
       - '.github/workflows/build.yml'
-
+    workflow_dispatch:
 
 jobs:
   build:
@@ -18,7 +18,6 @@ jobs:
       matrix:
         arch:
           - amd64
-          - arm64
     steps:
       - uses: actions/checkout@v4
         with:
@@ -86,7 +85,7 @@ jobs:
         with:
           inputs: ghcr.io/hisamatsu/latex-docker:latest,ghcr.io/hisamatsu/latex-docker:${{ env.IMAGE_VERSION }}
           # inputs: ghcr.io/hisamatsu/latex-docker:latest,ghcr.io//latex-docker:${{ env.IMAGE_VERSION }},ghcr.io/hisamatsu/latex-docker:2023-frozen
-          images: ghcr.io/hisamatsu/latex-docker:latest-amd64,ghcr.io//latex-docker:latest-arm64
+          images: ghcr.io/hisamatsu/latex-docker:latest-amd64
           push: true
       - name: Create GitHub Releases
         env:
