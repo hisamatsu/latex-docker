@@ -46,6 +46,13 @@ RUN tlmgr update --self --all && \
     rm create_font_cache.sh && \
     useradd -m -u 1000 -s /bin/bash latex
 
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    openssh-client &&\
+    apt-get clean && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
+
 USER latex
 
 WORKDIR /workdir
